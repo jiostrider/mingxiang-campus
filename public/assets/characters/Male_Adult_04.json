@@ -1,0 +1,127 @@
+{
+  "name": "Male_Adult_04",
+  "meshes": [
+    {
+      "name": "m006_hipoly_81_bones_opacity",
+      "vertices": 26052,
+      "material": [
+        "m006_body",
+        "m006_head",
+        "m006_opacity"
+      ]
+    }
+  ],
+  "boneNames": [
+    "Bip01",
+    "Bip01_Pelvis",
+    "Bip01_Spine",
+    "Bip01_R_Thigh",
+    "Bip01_R_Calf",
+    "Bip01_R_Foot",
+    "Bip01_R_Toe0",
+    "Bip01_Spine1",
+    "Bip01_Spine2",
+    "Bip01_Neck",
+    "Bip01_Head",
+    "Bip01_LEye",
+    "Bip01_REye",
+    "Bip01_MJaw",
+    "Bip01_MTongue",
+    "Bip01_MBottomLip",
+    "Bip01_LMouthBottom",
+    "Bip01_RMouthBottom",
+    "Bip01_RMasseter",
+    "Bip01_LMasseter",
+    "Bip01_ROuterEyebrow",
+    "Bip01_LOuterEyebrow",
+    "Bip01_MNose",
+    "Bip01_RCaninus",
+    "Bip01_LEyeBlinkBottom",
+    "Bip01_MUpperLip",
+    "Bip01_REyeBlinkBottom",
+    "Bip01_LCaninus",
+    "Bip01_RMouthCorner",
+    "Bip01_RUpperlip",
+    "Bip01_LUpperlip",
+    "Bip01_LMouthCorner",
+    "Bip01_RCheek",
+    "Bip01_REyeBlinkTop",
+    "Bip01_RInnerEyebrow",
+    "Bip01_LInnerEyebrow",
+    "Bip01_LCheek",
+    "Bip01_LEyeBlinkTop",
+    "Bip01_MMiddleEyebrow",
+    "Bip01_R_Clavicle",
+    "Bip01_R_UpperArm",
+    "Bip01_R_Forearm",
+    "Bip01_R_Hand",
+    "Bip01_R_Finger1",
+    "Bip01_R_Finger11",
+    "Bip01_R_Finger12",
+    "Bip01_R_Finger0",
+    "Bip01_R_Finger01",
+    "Bip01_R_Finger02",
+    "Bip01_R_Finger2",
+    "Bip01_R_Finger21",
+    "Bip01_R_Finger22",
+    "Bip01_R_Finger3",
+    "Bip01_R_Finger31",
+    "Bip01_R_Finger32",
+    "Bip01_R_Finger4",
+    "Bip01_R_Finger41",
+    "Bip01_R_Finger42",
+    "Bip01_L_Clavicle",
+    "Bip01_L_UpperArm",
+    "Bip01_L_Forearm",
+    "Bip01_L_Hand",
+    "Bip01_L_Finger0",
+    "Bip01_L_Finger01",
+    "Bip01_L_Finger02",
+    "Bip01_L_Finger1",
+    "Bip01_L_Finger11",
+    "Bip01_L_Finger12",
+    "Bip01_L_Finger2",
+    "Bip01_L_Finger21",
+    "Bip01_L_Finger22",
+    "Bip01_L_Finger3",
+    "Bip01_L_Finger31",
+    "Bip01_L_Finger32",
+    "Bip01_L_Finger4",
+    "Bip01_L_Finger41",
+    "Bip01_L_Finger42",
+    "Bip01_L_Thigh",
+    "Bip01_L_Calf",
+    "Bip01_L_Foot",
+    "Bip01_L_Toe0"
+  ],
+  "bounds": {
+    "min": [
+      -67.41140395377974,
+      -0.07038979749292985,
+      -15.285635470654075
+    ],
+    "max": [
+      67.41140921651805,
+      186.78716430463658,
+      19.124160994987022
+    ]
+  },
+  "clips": [
+    {
+      "name": "idle",
+      "duration": 2.7333333492279053,
+      "tracks": 243
+    },
+    {
+      "name": "walk",
+      "duration": 1.0666667222976685,
+      "tracks": 243
+    },
+    {
+      "name": "run",
+      "duration": 0.7666666507720947,
+      "tracks": 243
+    }
+  ],
+  "bytes": 6360620
+}

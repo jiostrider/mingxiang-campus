@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#152c31" />
+    <meta name="description" content="太原理工大学明向校区 · 南门、南广场、图书馆与明向湖的交互校园漫游。" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>明向 · 校园漫游</title>
+  </head>
+  <body>
+    <canvas id="world" tabindex="0" aria-label="明向校园三维场景，WASD 移动，鼠标调整视角"></canvas>
+    <div id="loading" role="status"><span class="loading-mark">明</span><p>正在走进明向校园<span class="dots">…</span></p><small id="load-detail">铺开道路，点亮窗光</small></div>
+    <header class="masthead">
+      <div class="identity"><div class="seal">明</div><div><strong>明向 <span>校园漫游</span></strong><small>TAIYUAN UNIVERSITY OF TECHNOLOGY</small></div></div>
+      <div class="top-actions"><span class="edition">首段路线 · 实景参考版</span><button id="map-button" title="校园地图（M）">地图 <kbd>M</kbd></button><button id="settings-button" aria-label="画质与操作设置" title="画质与操作">设置</button></div>
+    </header>
+    <main id="welcome" class="welcome">
+      <div class="eyebrow"><span></span>山西 · 晋中 / 明向校区</div>
+      <h1>走进明向。<br><em>让校园成为风景。</em></h1>
+      <p>从南门出发，穿过广场，<br>在图书馆前停步，骑行到湖边。</p>
+      <button id="start" class="primary">开始漫游 <span>↗</span></button>
+      <div class="welcome-details"><span>自由步行</span><i></i><span>自行车骑行</span><i></i><span>校园行人</span></div>
+      <small class="reference-note">根据校园全景重建的首版场景，建筑尺寸与细节待校准。</small>
+    </main>
+    <div id="pause" class="panel pause" hidden><span class="eyebrow">稍作停留</span><h2>校园就在这里。</h2><p>点击继续，或按 Esc 释放鼠标后使用地图和设置。</p><button id="resume" class="primary">继续漫游 <span>↗</span></button></div>
+    <div id="hud" hidden>
+      <aside class="location"><span class="location-line"></span><div><small id="area-caption">SOUTH ENTRANCE</small><h2 id="area-name">南门</h2><p id="area-hint">沿中轴向北，前往南广场</p></div></aside>
+      <div class="minimap-wrap"><canvas id="minimap" width="360" height="360" aria-label="校园位置小地图"></canvas><div class="minimap-caption"><span>明向校区</span><button id="expand-map" aria-label="展开地图">↗</button></div></div>
+      <div class="status"><span id="mode">步行</span><strong id="speed">0</strong><small>km/h</small><div class="speed-line"><span id="speed-fill"></span></div></div>
+      <div id="bike-prompt" class="interaction"><kbd>E</kbd><span>骑上自行车</span></div>
+      <div class="controls"><span><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> 移动</span><span><kbd>Shift</kbd> 跑步</span><span><kbd>Space</kbd> 跳跃 / 刹车</span><span><kbd>E</kbd> 骑行 / 下车</span><span><kbd>Esc</kbd> 释放鼠标</span></div>
+      <div id="crosshair"></div>
+    </div>
+    <div id="toast" role="status" hidden></div>
+    <dialog id="map-dialog" class="panel map-panel"><div class="panel-top"><div><span class="eyebrow">CAMPUS GUIDE</span><h2>这一程，去哪里？</h2></div><button class="close" data-close="map-dialog" aria-label="关闭地图">×</button></div><p class="panel-intro">选择地点即可前往，步行与自行车都能到达。</p><canvas id="large-map" width="760" height="720" aria-label="首段路线地图"></canvas><div class="destinations"><button data-go="gate"><small>01</small>南门</button><button data-go="square"><small>02</small>南广场</button><button data-go="library"><small>03</small>图书馆</button><button data-go="lake"><small>04</small>明向湖</button><button data-go="datong"><small>05</small>大同坊</button></div><p class="map-note">北 ↑　示意位置，非测绘地图 · 湖区请沿岸骑行</p></dialog>
+    <dialog id="settings-dialog" class="panel settings-panel"><div class="panel-top"><div><span class="eyebrow">MAKE YOURSELF AT HOME</span><h2>漫游设置</h2></div><button class="close" data-close="settings-dialog" aria-label="关闭设置">×</button></div><label>画面质量<select id="quality"><option value="low">流畅</option><option value="medium" selected>均衡</option><option value="high">精细</option></select></label><label>鼠标灵敏度<input id="sensitivity" type="range" min="0.5" max="2" step="0.1" value="1" /></label><div class="settings-help"><p><b>WASD</b> 行走；骑行时 W/S 加减速、A/D 转向。</p><p><b>鼠标</b> 环顾四周；滚轮调整镜头远近。</p><p><b>E</b> 靠近自行车时上车，再按一次下车。</p><p><b>R</b> 回到南門，<b>M</b> 打开地图，<b>Esc</b> 暂停。</p><p>无法锁定鼠标时，可按住场景拖动视角。</p></div><button id="reset" class="secondary">返回南门并重置自行车</button><p class="performance" id="performance">正在检测运行状态</p></dialog>
+    <div id="fatal" class="panel" hidden><h2>场景暂时无法启动</h2><p id="fatal-message"></p><button onclick="location.reload()" class="primary">重新加载</button></div>
+    <footer class="welcome-footer" id="welcome-footer"><span>01 — 南门 · 南广场 · 图书馆 · 明向湖</span><span>以脚步，重新认识校园</span></footer>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

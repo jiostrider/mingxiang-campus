@@ -1,0 +1,80 @@
+{
+  "file": "20261008-1410-05.7911838.mp4",
+  "duration": 69.631979,
+  "width": 2560,
+  "height": 1356,
+  "frames": [
+    {
+      "seconds": 0.1,
+      "path": "references/user-recordings/20261008-review/frame-00.jpg"
+    },
+    {
+      "seconds": 4.178351705882353,
+      "path": "references/user-recordings/20261008-review/frame-01.jpg"
+    },
+    {
+      "seconds": 8.256703411764706,
+      "path": "references/user-recordings/20261008-review/frame-02.jpg"
+    },
+    {
+      "seconds": 12.33505511764706,
+      "path": "references/user-recordings/20261008-review/frame-03.jpg"
+    },
+    {
+      "seconds": 16.413406823529414,
+      "path": "references/user-recordings/20261008-review/frame-04.jpg"
+    },
+    {
+      "seconds": 20.491758529411765,
+      "path": "references/user-recordings/20261008-review/frame-05.jpg"
+    },
+    {
+      "seconds": 24.570110235294123,
+      "path": "references/user-recordings/20261008-review/frame-06.jpg"
+    },
+    {
+      "seconds": 28.648461941176475,
+      "path": "references/user-recordings/20261008-review/frame-07.jpg"
+    },
+    {
+      "seconds": 32.726813647058826,
+      "path": "references/user-recordings/20261008-review/frame-08.jpg"
+    },
+    {
+      "seconds": 36.80516535294118,
+      "path": "references/user-recordings/20261008-review/frame-09.jpg"
+    },
+    {
+      "seconds": 40.88351705882353,
+      "path": "references/user-recordings/20261008-review/frame-10.jpg"
+    },
+    {
+      "seconds": 44.96186876470589,
+      "path": "references/user-recordings/20261008-review/frame-11.jpg"
+    },
+    {
+      "seconds": 49.040220470588245,
+      "path": "references/user-recordings/20261008-review/frame-12.jpg"
+    },
+    {
+      "seconds": 53.11857217647059,
+      "path": "references/user-recordings/20261008-review/frame-13.jpg"
+    },
+    {
+      "seconds": 57.19692388235295,
+      "path": "references/user-recordings/20261008-review/frame-14.jpg"
+    },
+    {
+      "seconds": 61.275275588235296,
+      "path": "references/user-recordings/20261008-review/frame-15.jpg"
+    },
+    {
+      "seconds": 65.35362729411764,
+      "path": "references/user-recordings/20261008-review/frame-16.jpg"
+    },
+    {
+      "seconds": 69.431979,
+      "path": "references/user-recordings/20261008-review/frame-17.jpg"
+    }
+  ]
+}

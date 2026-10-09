@@ -1,0 +1,58 @@
+<!doctype html><meta charset="utf-8"><title>Local character asset converter</title>
+<script type="module">
+import * as THREE from 'three';
+import {FBXLoader} from 'three/examples/jsm/loaders/FBXLoader.js';
+import {GLTFExporter} from 'three/examples/jsm/exporters/GLTFExporter.js';
+
+window.convertCharacter=async function(name){
+  const folder=`/references/character-review/source/${name}/`,missing=[];
+  const manager=new THREE.LoadingManager();
+  manager.setURLModifier(url=>{
+    if(url.startsWith('blob:')||url.startsWith('data:'))return url;
+    const leaf=decodeURIComponent(url).split(/[\\/]/).pop();
+    if(leaf?.endsWith('.tga'))return folder+leaf.replace(/\.tga$/,/opacity/.test(leaf)?'.png':'.jpg');
+    return url;
+  });
+  const loader=new FBXLoader(manager);
+  const object=await loader.loadAsync(folder+name+'.fbx');
+  const meshes=[];object.traverse(n=>{if(n.isMesh)meshes.push({name:n.name,vertices:n.geometry.attributes.position.count,material:Array.isArray(n.material)?n.material.map(m=>m.name):n.material.name});});
+  // Keep the highest LOD. The original asset contains four stacked copies.
+  object.traverse(n=>{if(n.isMesh&&/midpoly|lowpoly|ultralowpoly/i.test(n.name))n.visible=false;});
+  object.traverse(n=>{
+    if(!n.isMesh)return;
+    n.frustumCulled=false;
+    for(const m of (Array.isArray(n.material)?n.material:[n.material])){
+      m.color.set(0xffffff);m.side=THREE.DoubleSide;
+      m.specular?.setRGB(.04,.04,.04);m.shininess=10;
+      if(m.map&&/opacity/.test(m.map.name||m.map.source?.data?.src||'')){m.transparent=false;m.alphaTest=.4;}
+      m.normalMap=null;
+    }
+  });
+  const boneNames=[];object.traverse(n=>{if(n.isBone)boneNames.push(n.name);});
+  const clips=[];
+  for(const clipName of ['idle','walk','run']){
+    const animationManager=new THREE.LoadingManager();animationManager.setURLModifier(()=>'/assets/surfaces/concrete_floor_02-Diffuse.jpg');
+    const buffer=await (await fetch(`/references/character-review/source/${clipName}.fbx`)).arrayBuffer();
+    const source=new FBXLoader(animationManager).parse(buffer,'');
+    const clip=source.animations[0]?.clone();if(!clip)throw new Error('Missing '+clipName+' animation');
+    clip.name=clipName;
+    clip.tracks=clip.tracks.filter(t=>{
+      const trackBone=t.name.slice(0,t.name.lastIndexOf('.'));
+      return boneNames.includes(trackBone);
+    });
+    // Game code owns translation; animation only supplies the skeletal pose.
+    for(const track of clip.tracks){
+      if(track.name.endsWith('.position')&&/^(Bip01|Bip01_Pelvis)$/i.test(track.name.split('.')[0])){
+        for(let i=0;i<track.values.length;i+=3){track.values[i]=track.values[0];track.values[i+2]=track.values[2];}
+      }
+    }
+    if(!clip.tracks.length)throw new Error('No matching animation tracks for '+clipName);
+    clips.push(clip);
+  }
+  object.updateMatrixWorld(true);
+  const bounds=new THREE.Box3().setFromObject(object),size=new THREE.Vector3();bounds.getSize(size);
+  const glb=await new GLTFExporter().parseAsync(object,{binary:true,onlyVisible:true,animations:clips,maxTextureSize:1024});
+  window.convertedGLB=Array.from(new Uint8Array(glb));
+  return {name,meshes,boneNames,bounds:{min:bounds.min.toArray(),max:bounds.max.toArray()},clips:clips.map(c=>({name:c.name,duration:c.duration,tracks:c.tracks.length})),bytes:glb.byteLength};
+};
+</script>

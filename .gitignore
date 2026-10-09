@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.runtime/
+artifacts/
+.env
+.env.*
+!.env.example
+*.log
+__pycache__/
+*.pyc
+# Local reference recordings are preserved on disk, outside normal Git history.
+references/user-recordings/*.mp4
