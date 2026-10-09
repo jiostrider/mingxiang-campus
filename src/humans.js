@@ -5,8 +5,8 @@ const ids=['Male_Adult_02','Male_Adult_01','Male_Adult_04'];
 export async function loadHumanFactory(scene,shadow){
   const templates=await Promise.all(ids.map(async id=>{
     const [container,info]=await Promise.all([
-      B.LoadAssetContainerAsync(`/assets/characters/${id}.glb?v=skin-root-2`,scene),
-      fetch(`/assets/characters/${id}.json`).then(r=>r.json()),
+      B.LoadAssetContainerAsync(`${import.meta.env.BASE_URL}assets/characters/${id}.glb?v=skin-root-2`,scene),
+      fetch(`${import.meta.env.BASE_URL}assets/characters/${id}.json`).then(r=>r.json()),
     ]);
     for(const m of container.materials){
       if(m instanceof B.PBRMaterial){

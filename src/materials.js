@@ -17,7 +17,7 @@ export function surfaceMaterial(scene,name,hex,roughness=.85,metallic=0){
 export function scannedSurface(scene,material,id,u=1,v=1,tint='#ffffff',normalStrength=.25){
   material.albedoTexture?.dispose();material.bumpTexture?.dispose();
   const texture=(suffix,gamma=true)=>{
-    const t=new B.Texture(`/assets/surfaces/${id}-${suffix}.jpg`,scene);
+    const t=new B.Texture(`${import.meta.env.BASE_URL}assets/surfaces/${id}-${suffix}.jpg`,scene);
     t.wrapU=t.wrapV=B.Texture.WRAP_ADDRESSMODE;t.uScale=u;t.vScale=v;t.anisotropicFilteringLevel=16;t.gammaSpace=gamma;return t;
   };
   material.albedoTexture=texture('Diffuse');material.albedoColor=B.Color3.FromHexString(tint);

@@ -1,7 +1,7 @@
 import * as B from '@babylonjs/core';
 
 export function setupRendering(scene,engine,camera){
-  scene.environmentTexture=new B.HDRCubeTexture('/assets/surfaces/campus-daylight.hdr',scene,128,false,true,false,true);
+  scene.environmentTexture=new B.HDRCubeTexture(`${import.meta.env.BASE_URL}assets/surfaces/campus-daylight.hdr`,scene,128,false,true,false,true);
   scene.environmentIntensity=1.05;
   const fill=new B.HemisphericLight('sky-light',new B.Vector3(0,1,0),scene);
   fill.intensity=.55;fill.diffuse=new B.Color3(.77,.87,1);fill.groundColor=new B.Color3(.28,.25,.2);
